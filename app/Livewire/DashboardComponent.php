@@ -39,10 +39,15 @@ class DashboardComponent extends Component
     }
     public function createCliente()
     {
-        $exist = Cliente::where('nombre', 'LIKE', '%' . strtolower($this->cliente) . '%')->get(['nombre', 'telefono', 'direccion', 'ubicacion']);
-        if ($exist) {
+        // Verificar si el cliente ya existe
+        $existingCliente = Cliente::where('nombre', $this->cliente)->first();
+
+        if ($existingCliente) {
+            // Opcional: Mostrar un mensaje de error o notificación
+            $this->addError('cliente', 'El cliente con este nombre ya existe.');
             return;
         }
+
         Cliente::create([
             'nombre' => $this->cliente,
             'telefono' => $this->telefono,
@@ -55,8 +60,7 @@ class DashboardComponent extends Component
     {
         $this->isLoading = true;
 
-        sleep(2);
-        if (strlen($this->cliente) > 0) {
+        if (strlen($this->cliente) > 3) {
             // Buscar clientes en la base de datos
             $this->clientes = Cliente::where('nombre', 'LIKE', '%' . strtolower($this->cliente) . '%')
                 ->take(5)

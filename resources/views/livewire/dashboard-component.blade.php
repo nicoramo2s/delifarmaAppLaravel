@@ -106,7 +106,7 @@
             <label class="label label-text mb-1">Cadete</label>
             <select class="select w-full rounded" wire:model="numero_de_cadete">
                 <option value="" disabled selected>-- Selecciona el Cadete --</option>
-                @foreach (['GONZALO' => '5492645811779', 'ENZO' => '5492645811179'] as $nombre => $numero)
+                @foreach (['GONZALO' => '5491163540082', 'ENZO' => '5492643179886'] as $nombre => $numero)
                     <option value="{{ $numero }}">{{ $nombre }}</option>
                 @endforeach
             </select>
